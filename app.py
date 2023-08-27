@@ -11,7 +11,68 @@ def upload_files():
     print('req recv2');
     uploaded_files = request.files.getlist('photos')
     print(request.form);
-    data = {'summary' : 'lorem1isadj asiod joajd oiasjd oas'}
+    data = {'summary' : 
+                {
+                    'total_images_uploaded' : len(uploaded_files),
+                    'total_defects' : 10,
+                    'identified_defect_tags' : ['Cracks','Dents','Missing Heads'],
+                    '0' : {
+                        'name' : 'Scratch',
+                        'total' : 5,
+                        'red' : 10,
+                        'orange' : 0,
+                        'blue' : 4,
+                        'big' : 1,
+                        'medium' : 2,
+                        'small' : 3,
+                        
+                    },
+                    '1' : {
+                        'name' : 'Paint off',
+                        'total' : 5,
+                        'red' : 10,
+                        'orange' : 0,
+                        'blue' : 4,
+                        'big' : 1,
+                        'medium' : 2,
+                        'small' : 3,
+                        
+                    },
+                    '2' : {
+                        'name' : 'Crack',
+                        'total' : 5,
+                        'red' : 10,
+                        'orange' : 0,
+                        'blue' : 4,
+                        'big' : 1,
+                        'medium' : 2,
+                        'small' : 3,
+                        
+                    },
+                    '3' : {
+                        'name' : 'Missing Head',
+                        'total' : 5,
+                        'red' : 10,
+                        'orange' : 0,
+                        'blue' : 4,
+                        'big' : 1,
+                        'medium' : 2,
+                        'small' : 3,
+                        
+                    },
+                    '4' : {
+                        'name' : 'Dent',
+                        'total' : 5,
+                        'red' : 10,
+                        'orange' : 0,
+                        'blue' : 4,
+                        'big' : 1,
+                        'medium' : 2,
+                        'small' : 3,
+                        
+                    },
+                }
+        }
     selected_flight = request.form.get('selectedFlight')
     selected_date = request.form.get('selectedDate')
     number_input1 = int(request.form.get('numberInput1'))
@@ -33,7 +94,61 @@ def upload_files():
         # Encode the photo as a base64 string
         with open(file_path, 'rb') as photo_file:
             encoded_photo = base64.b64encode(photo_file.read()).decode('utf-8')
-            uploaded_photos.append({'filename': file.filename, 'data': encoded_photo,'image_id' : len(uploaded_photos),'defects' : [{"defectName": "abcd","defectContent": "asdjks ajdnasjnd kasnjd ka","coords": [134, 197, 43, 99],},{"defectName": "poqii","defectContent": "opaksdop oasdk poaskd okaso;","coords": [154, 511, 40, 107],},]})
+            uploaded_photos.append({
+                'filename': file.filename, 
+                'data': encoded_photo,
+                'image_id' : len(uploaded_photos),
+                'defects' : [{"type": 4,"severity": "Red","size" : "Big","coords": [134, 197, 43, 99]},{"type": 4,"severity": "Red","size" : "Big","coords": [134, 197, 43, 99]}],
+                '0' : {
+                    'name' : 'scratch',
+                    'total' : 5,
+                    'red' : 10,
+                    'orange' : 0,
+                    'blue' : 4,
+                    'big' : 1,
+                    'medium' : 2,
+                    'small' : 3,
+                    },
+                '1' : {
+                    'name' : 'Paint off',
+                    'total' : 5,
+                    'red' : 10,
+                    'orange' : 0,
+                    'blue' : 4,
+                    'big' : 1,
+                    'medium' : 2,
+                    'small' : 3,                
+                },
+                '2' : {
+                    'name' : 'Crack',
+                    'total' : 5,
+                    'red' : 10,
+                    'orange' : 0,
+                    'blue' : 4,
+                    'big' : 1,
+                    'medium' : 2,
+                    'small' : 3,
+                },
+                '3' : {
+                    'name' : 'Missing Head',
+                    'total' : 5,
+                    'red' : 10,
+                    'orange' : 0,
+                    'blue' : 4,
+                    'big' : 1,
+                    'medium' : 2,
+                    'small' : 3,
+                },
+                '4' : {
+                    'name' : 'Dent',
+                    'total' : 5,
+                    'red' : 10,
+                    'orange' : 0,
+                    'blue' : 4,
+                    'big' : 1,
+                    'medium' : 2,
+                    'small' : 3,
+                },})
         
     data['uploaded_photos'] = uploaded_photos
     return jsonify(data), 200
